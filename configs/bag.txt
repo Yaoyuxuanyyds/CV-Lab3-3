@@ -1,4 +1,4 @@
-expname = bag
+expname = bag_3
 basedir = ./logs
 datadir = ./data/nerf_llff_data/bag
 dataset_type = llff

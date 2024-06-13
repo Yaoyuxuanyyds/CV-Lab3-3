@@ -720,7 +720,11 @@ def train():
     print('VAL views are', i_val)
 
     # Summary writers
-    writer = SummaryWriter(os.path.join(basedir, 'summaries', expname))
+    logdir = os.path.join(basedir, 'summaries', expname)
+    os.makedirs(logdir, exist_ok=True)
+    print(f"TensorBoard log directory: {logdir}")
+    writer = SummaryWriter(logdir)
+    
     # Log the training process
     setup_logging(expname, basedir)
     logging.info("Starting training")
@@ -869,6 +873,7 @@ def train():
     
         if i%args.i_print==0:
             tqdm.write(f"[TRAIN] Iter: {i} Loss: {loss.item()}  PSNR: {psnr.item()}")
+            
             logging.info(f"[TRAIN] Iter: {i} Loss: {loss.item()} PSNR: {psnr.item()}")
 
             # Record to TensorBoard
